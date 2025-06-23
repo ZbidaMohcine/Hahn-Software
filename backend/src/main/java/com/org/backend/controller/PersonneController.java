@@ -22,7 +22,7 @@ public class PersonneController {
     ResponseEntity<?> findAllPersonnes() {
         return ResponseEntity.ok().body(personneService.findAll());
     }
-    @PostMapping("/{id}")
+    @GetMapping("/{id}")
     ResponseEntity<?> findPersonneById(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(personneService.findById(id));
     }
