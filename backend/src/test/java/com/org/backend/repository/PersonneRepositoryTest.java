@@ -39,11 +39,11 @@ class PersonneRepositoryTest {
         personneRepository.save(personne);
 
         // Act
-        List<Personne> result = personneRepository.findAllByPrenom("Jane");
+        List<Personne> result = personneRepository.findAllByPrenom("Doe");
 
         // Assert
         assertEquals(1, result.size());
-        assertEquals("Jane", result.get(0).getPrenom());
+        assertEquals("Doe", result.get(0).getPrenom());
     }
 
     @Test
