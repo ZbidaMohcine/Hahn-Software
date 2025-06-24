@@ -4,7 +4,7 @@ import com.org.backend.dto.PersonneDto;
 import com.org.backend.service.PersonneService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/personnes")
 
@@ -18,7 +18,7 @@ public class PersonneController {
     ResponseEntity<?> savePersonne(@RequestBody PersonneDto personneDto) {
         return ResponseEntity.ok().body(personneService.save(personneDto));
     }
-    @PostMapping("/findAll")
+    @GetMapping("/findAll")
     ResponseEntity<?> findAllPersonnes() {
         return ResponseEntity.ok().body(personneService.findAll());
     }
