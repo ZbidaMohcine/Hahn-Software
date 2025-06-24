@@ -1,9 +1,10 @@
 import './App.css';
 import AddPerson from './features/addPersonne/AddPerson';
 import PersonneList from './features/listPersonne/PersonneList';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UpdatePerson from './features/updatePersone/UpdatePerson';
 import { useSelector } from 'react-redux';
+import Navbar from './components/Navbar';
 
 function App() {
   const notification = useSelector((state) => state.notification);
@@ -26,17 +27,12 @@ function App() {
             {notification.message}
           </div>
         )}
-        <header className="App-header">
-          <nav style={{ marginBottom: 20 }}>
-            <Link to="/" style={{ margin: '0 10px', color: '#61dafb', textDecoration: 'none', fontWeight: 'bold' }}>Home</Link>
-            <Link to="/add" style={{ margin: '0 10px', color: '#61dafb', textDecoration: 'none', fontWeight: 'bold' }}>Add Person</Link>
-          </nav>
-          <Routes>
-            <Route path="/" element={<PersonneList />} />
-            <Route path="/add" element={<AddPerson />} />
-            <Route path="/update/:id" element={<UpdatePerson />} />
-          </Routes>
-        </header>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<PersonneList />} />
+          <Route path="/add" element={<AddPerson />} />
+          <Route path="/update/:id" element={<UpdatePerson />} />
+        </Routes>
       </div>
     </Router>
   );

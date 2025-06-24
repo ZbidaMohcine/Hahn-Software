@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { updatePerson } from '../addPersonne/addPersonSlice';
 import { setNotification, clearNotification } from '../../app/notificationSlice';
+import { Box, TextField, Button, Alert, Typography, Paper } from '@mui/material';
 
 function UpdatePerson() {
   const { id } = useParams();
@@ -43,48 +44,72 @@ function UpdatePerson() {
   };
 
   if (!person) {
-    return <div>Person not found.</div>;
+    return <Alert severity="error">Person not found.</Alert>;
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: 300 }}>
-      <h2>Update Person</h2>
-      <input
-        type="text"
-        name="nom"
-        placeholder="Nom"
-        value={form.nom}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="text"
-        name="prenom"
-        placeholder="Prénom"
-        value={form.prenom}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="number"
-        name="age"
-        placeholder="Age"
-        value={form.age}
-        onChange={handleChange}
-        required
-        min="0"
-      />
-      <button type="submit" disabled={loading}>{loading ? 'Updating...' : 'Update Person'}</button>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-    </form>
+    <Box
+      component={Paper}
+      elevation={3}
+      sx={{
+        p: { xs: 2, sm: 4 },
+        maxWidth: 400,
+        width: '90%',
+        mx: 'auto',
+        mt: { xs: 3, sm: 6 },
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
+        borderRadius: 2,
+      }}
+    >
+      <Typography variant="h5" align="center" gutterBottom>
+        Update Person
+      </Typography>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <TextField
+          label="Nom"
+          name="nom"
+          value={form.nom}
+          onChange={handleChange}
+          required
+        />
+        <TextField
+          label="Prénom"
+          name="prenom"
+          value={form.prenom}
+          onChange={handleChange}
+          required
+        />
+        <TextField
+          label="Email"
+          name="email"
+          type="email"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
+        <TextField
+          label="Age"
+          name="age"
+          type="number"
+          value={form.age}
+          onChange={handleChange}
+          required
+          inputProps={{ min: 0 }}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          disabled={loading}
+          sx={{ mt: 2 }}
+        >
+          {loading ? 'Updating...' : 'Update Person'}
+        </Button>
+        {error && <Alert severity="error">{error}</Alert>}
+      </form>
+    </Box>
   );
 }
 

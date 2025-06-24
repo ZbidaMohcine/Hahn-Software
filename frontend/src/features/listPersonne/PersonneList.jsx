@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPersons, deletePerson } from '../addPersonne/addPersonSlice';
 import { useNavigate } from 'react-router-dom';
+import {
+  Table, TableHead, TableRow, TableCell, TableBody, Paper, Button, Typography, Box, CircularProgress, Alert
+} from '@mui/material';
 
 function PersonneList() {
   const dispatch = useDispatch();
@@ -22,46 +25,67 @@ function PersonneList() {
     navigate(`/update/${id}`);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  if (loading) return <Box display="flex" justifyContent="center" mt={4}><CircularProgress /></Box>;
+  if (error) return <Alert severity="error">{error}</Alert>;
 
   return (
-    <div>
-      <h2>Person List</h2>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr>
-            <th style={{ border: '1px solid #ccc', padding: '8px' }}>Nom</th>
-            <th style={{ border: '1px solid #ccc', padding: '8px' }}>Prénom</th>
-            <th style={{ border: '1px solid #ccc', padding: '8px' }}>Email</th>
-            <th style={{ border: '1px solid #ccc', padding: '8px' }}>Age</th>
-            <th style={{ border: '1px solid #ccc', padding: '8px' }}>Delete</th>
-            <th style={{ border: '1px solid #ccc', padding: '8px' }}>Update</th>
-          </tr>
-        </thead>
-        <tbody>
-          {persons.map((person) => (
-            <tr key={person.id}>
-              <td style={{ border: '1px solid #ccc', padding: '8px' }}>{person.nom}</td>
-              <td style={{ border: '1px solid #ccc', padding: '8px' }}>{person.prenom}</td>
-              <td style={{ border: '1px solid #ccc', padding: '8px' }}>{person.email}</td>
-              <td style={{ border: '1px solid #ccc', padding: '8px' }}>{person.age}</td>
-              <td style={{ border: '1px solid #ccc', padding: '8px' }}>
-                <button onClick={() => handleDelete(person.id)} style={{ color: 'white', background: 'red', border: 'none', padding: '6px 12px', borderRadius: '4px' }}>Delete</button>
-              </td>
-              <td style={{ border: '1px solid #ccc', padding: '8px' }}>
-                <button onClick={() => handleUpdate(person.id)} style={{ color: 'white', background: 'orange', border: 'none', padding: '6px 12px', borderRadius: '4px' }}>Update</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Box sx={{ maxWidth: '100%', p: { xs: 1, sm: 3 }, mt: 4 }}>
+      <Paper sx={{ p: 2, borderRadius: 2 }}>
+        <Typography variant="h5" align="center" gutterBottom>
+          Person List
+        </Typography>
+        <Table>
+          <TableHead>
+            <TableRow sx={{ backgroundColor: 'primary.main' }}>
+              <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Nom</TableCell>
+              <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Prénom</TableCell>
+              <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Email</TableCell>
+              <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Age</TableCell>
+              <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Delete</TableCell>
+              <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Update</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {persons.map((person) => (
+              <TableRow
+                key={person.id}
+                hover
+                sx={{
+                  transition: 'background 0.2s',
+                  '&:hover': {
+                    backgroundColor: 'primary.light',
+                    cursor: 'pointer'
+                  }
+                }}
+              >
+                <TableCell>{person.nom}</TableCell>
+                <TableCell>{person.prenom}</TableCell>
+                <TableCell>{person.email}</TableCell>
+                <TableCell>{person.age}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => handleDelete(person.id)}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="warning"
+                    onClick={() => handleUpdate(person.id)}
+                  >
+                    Update
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
+    </Box>
   );
 }
 
