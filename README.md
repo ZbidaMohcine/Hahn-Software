@@ -185,7 +185,14 @@ Hahn-Software/
 
 ## Screenshots
 
-> _Add screenshots of the login page, list page, add/edit forms, etc. here._
+### Person List
+![Person List](screenshots/person-list.png)
+
+### Add New Person
+![Add New Person](screenshots/add-person.png)
+
+### Update Person
+![Update Person](screenshots/update-person.png)
 
 ---
 
