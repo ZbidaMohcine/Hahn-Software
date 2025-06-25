@@ -1,3 +1,47 @@
+# Hahn Software Frontend
+
+This project is a modern, responsive React application for managing people, using Material UI for design and Redux Toolkit for state management. It is designed to work seamlessly with a Spring Boot backend and PostgreSQL database, all orchestrated via Docker Compose.
+
+## Project Setup & Usage
+
+### 1. Clone the Repository
+```sh
+git clone <your-repo-url>
+cd Hahn-Software/frontend
+```
+
+### 2. Install Dependencies
+```sh
+npm install
+```
+
+### 3. Start the App (Development)
+```sh
+npm start
+```
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### 4. Build for Production
+```sh
+npm run build
+```
+
+### 5. Run with Docker Compose (Recommended for Full Stack)
+From the project root:
+```sh
+docker-compose up --build
+```
+- The frontend will be available at [http://localhost:3000](http://localhost:3000)
+- The backend API will be available at [http://localhost:8089](http://localhost:8089)
+
+### 6. Material UI Integration
+This app uses [Material UI](https://mui.com/) for a modern, responsive design. If you add new components, you can use MUI components for consistency:
+```sh
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
+```
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
