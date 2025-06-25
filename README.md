@@ -41,8 +41,8 @@ A full-stack web application for managing people (personnes), built with React (
 ```mermaid
 graph TD
   A[React Frontend] -- REST/JSON --> B[Spring Boot Backend]
-  B -- JDBC --> C[(PostgreSQL DB)]
-  B -- OIDC/JWT --> D[Keycloak (optional)]
+  B -- JDBC --> C[PostgreSQL DB]
+  B -- OIDC/JWT --> D[Keycloak optional]
 ```
 
 ---
