@@ -186,13 +186,13 @@ Hahn-Software/
 ## Screenshots
 
 ### Person List
-![Person List](screenshots/person-list.png)
+![Person List](![img.png](img.png))
 
 ### Add New Person
-![Add New Person](screenshots/add-person.png)
+![Add New Person](![img_1.png](img_1.png))
 
 ### Update Person
-![Update Person](screenshots/update-person.png)
+![Update Person](![img_2.png](img_2.png))
 
 ---
 
