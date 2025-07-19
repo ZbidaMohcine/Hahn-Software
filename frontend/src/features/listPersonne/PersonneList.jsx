@@ -8,11 +8,15 @@ import {
 
 function PersonneList() {
   const dispatch = useDispatch();
+  const [x, setX] = useState(0);
+
   const navigate = useNavigate();
   const { persons, loading, error } = useSelector((state) => state.person);
 
   useEffect(() => {
     dispatch(fetchPersons());
+    setX(x + 1);
+    setX((prev) => prev + 1);
   }, [dispatch]);
 
   const handleDelete = (id) => {
