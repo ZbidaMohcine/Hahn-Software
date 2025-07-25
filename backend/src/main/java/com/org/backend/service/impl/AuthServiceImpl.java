@@ -13,18 +13,18 @@ public class AuthServiceImpl implements AuthService {
         // For now, we'll use simple validation
         // In a real implementation, you would validate against Keycloak or your user database
         
-        if ("user".equals(loginRequest.getUsername()) && "user123".equals(loginRequest.getPassword())) {
+        if ("user".equals(loginRequest.username()) && "user123".equals(loginRequest.password())) {
             return new LoginResponse(
                 "mock-jwt-token-for-user",
-                loginRequest.getUsername(),
+                loginRequest.username(),
                 "user@example.com",
                 new String[]{"user"},
                 true
             );
-        } else if ("admin".equals(loginRequest.getUsername()) && "admin123".equals(loginRequest.getPassword())) {
+        } else if ("admin".equals(loginRequest.username()) && "admin123".equals(loginRequest.password())) {
             return new LoginResponse(
                 "mock-jwt-token-for-admin",
-                loginRequest.getUsername(),
+                loginRequest.username(),
                 "admin@example.com",
                 new String[]{"admin", "user"},
                 true

@@ -21,7 +21,7 @@ public class AuthController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         LoginResponse response = authService.login(loginRequest);
         
-        if (response.isAuthenticated()) {
+        if (response.authenticated()) {
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(401).body(response);

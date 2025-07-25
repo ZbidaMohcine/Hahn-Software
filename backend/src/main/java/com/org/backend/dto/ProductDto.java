@@ -1,14 +1,16 @@
 package com.org.backend.dto;
 
-public class ProductDto {
-    private Long id;
-    private String name;
-    private Double price;
+import jakarta.validation.constraints.*;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public Double getPrice() { return price; }
-    public void setPrice(Double price) { this.price = price; }
-} 
+public record ProductDto(
+        Long id,
+
+        @NotNull(message = "Name cannot be null")
+        @NotBlank(message = "Name cannot be blank")
+        @Pattern(regexp = "^\\D*$", message = "Name must not contain numbers")
+        String name,
+
+        @NotNull(message = "Price cannot be null")
+        @DecimalMin(value = "0.0", inclusive = true, message = "Price must be positive")
+        Double price
+) {}

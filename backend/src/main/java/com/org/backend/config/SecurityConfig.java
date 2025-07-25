@@ -24,7 +24,9 @@ public class SecurityConfig {
                 "/api/v1/personnes/{id}",
                 "/api/v1/personnes/save",
                 "/api/v1/personnes/update/{id}",
-                "/api/v1/personnes/delete/{id}").permitAll()
+                "/api/v1/personnes/delete/{id}")
+                    .permitAll()
+                    .requestMatchers("/api/v1/product").permitAll()
                 .anyRequest().authenticated()
             )
             .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()));

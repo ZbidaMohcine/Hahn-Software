@@ -8,10 +8,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.testcontainers.shaded.org.checkerframework.checker.units.qual.A;
 
 import java.util.Collections;
 
@@ -20,6 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(PersonneController.class)
+@AutoConfigureMockMvc(addFilters = false)
 public class PersonneControllerTest {
 
     @Autowired
@@ -36,11 +39,8 @@ public class PersonneControllerTest {
 
     @BeforeEach
     public void setUp() {
-        personneDto = new PersonneDto();
-        personneDto.setNom("Ali");
-        personneDto.setPrenom("Ben");
-        personneDto.setEmail("ali.ben@example.com");
-        personneDto.setAge(30);
+        personneDto = new PersonneDto("Ali", "Ben", "ali.ben@gmail.com", 30);
+
 
         personne = new Personne();
         personne.setId(1L);
@@ -65,7 +65,7 @@ public class PersonneControllerTest {
     public void testFindAllPersonnes() throws Exception {
         Mockito.when(personneService.findAll()).thenReturn(Collections.singletonList(personne));
 
-        mockMvc.perform(post("/api/v1/personnes/findAll"))
+        mockMvc.perform(get("/api/v1/personnes/findAll"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1L));
     }
@@ -74,7 +74,7 @@ public class PersonneControllerTest {
     public void testFindById() throws Exception {
         Mockito.when(personneService.findById(1L)).thenReturn(personne);
 
-        mockMvc.perform(post("/api/v1/personnes/1"))
+        mockMvc.perform(get("/api/v1/personnes/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("ali.ben@example.com"));
     }
